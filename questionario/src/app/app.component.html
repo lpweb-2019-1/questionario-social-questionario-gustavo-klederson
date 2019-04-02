@@ -1,0 +1,142 @@
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <div class="form-row">
+      <div class="col"></div>
+      <div class="col-md-6">
+        <h1>{{title}}</h1>
+        <hr/>
+        <form>
+          <!--Nome-->
+          <div class="form-group">
+            <label for="nome">Nome Completo:</label>
+            <input type="text" class="form-control" id="nome" name="nome" required/>
+            <small class="text-secondary">Insira seu nome completo.</small>
+          </div>
+          <!--Sexo-->
+          <div class="form-group">
+            <label for="sexo">Sexo:</label>
+            <br/>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input"  id="sexo" name="sexo" value="Masculino" required/> Masculino
+              </label>
+            </div>
+            <div class="form-check-inline">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" id="sexo" name="sexo" value="Feminino" required/> Feminino
+              </label>
+            </div>
+            <br/>
+            <small class="text-secondary">Insira sua idade em anos completos.</small>
+          </div>              
+          <!--Idade-->
+          <div class="form-group">
+            <label for="idade">Idade:</label>
+            <input type="number" class="form-control" id="idade" name="idade" required/>
+            <small class="text-secondary">Insira sua idade em anos completos.</small>
+          </div>
+          <!--Cidade-->
+          <div class="form-group">
+            <label for="cidade">Cidade:</label>
+            <select class="form-control" id="cidade" nome="cidade" required>
+              <option value="cidade">Palmas</option>
+              <option value="cidade">Porto Nacional</option>
+              <option value="cidade">Lajeado</option>
+              <option value="cidade">Paraíso</option>
+            </select>
+            <small class="text-secondary">Selecione sua cidade.</small>
+          </div>
+          <!--Botões-->
+          <div class="btn-group">
+            <button type="button" class="btn btn-outline-primary"><i class="fa fa-check"></i> Salvar</button>
+            <button type="button" class="btn btn-outline-secondary" formnovalidate><i class="fa fa-times"></i> Limpar</button>
+          </div>
+        </form>
+        <hr/>
+      </div>
+      <div class="col"></div>
+    </div>
+    <div class="form-row">
+      <div class="col"></div>
+      <div class="col-md-6">
+        <h1>Dados Estatísticos</h1>
+        <hr/>
+        <div class="list-group">
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Nome da pessoa mais velha:</h5>
+              <small class="text-muted">x anos</small>
+            </div>
+            <p class="mb-1">Fulano da Silva</p>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Nome da pessoa mais nova:</h5>
+              <small class="text-muted">x anos</small>
+            </div>
+            <p class="mb-1">Fulano da Silva</p>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Média de idade das mulheres:</h5>
+              <small class="text-muted">x mulheres</small>
+            </div>
+            <p class="mb-1">x anos</p>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Média de idade dos homens:</h5>
+              <small class="text-muted">x homens</small>
+            </div>
+            <p class="mb-1">x anos</p>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Média de idade em cada cidade:</h5>
+              <small class="text-muted"></small>
+            </div>
+            <table class="table table-bordered ">
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+              </tr>
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+              </tr>
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+              </tr>
+            </table>
+          </a>
+          <a class="list-group-item list-group-item-action">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">• Porcentagem de pessoas por sexo em cada cidade:</h5>
+              <small class="text-muted"></small>
+            </div>
+            <table class="table table-bordered ">
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+                <td>media</td>
+              </tr>
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+                <td>media</td>
+              </tr>
+              <tr>
+                <td>cidade</td>
+                <td>x anos</td>
+                <td>media</td>
+              </tr>
+            </table>
+          </a>
+        </div>
+        <hr/>
+      </div>
+      <div class="col"></div>
+    </div>
+  </div>
+</div>
