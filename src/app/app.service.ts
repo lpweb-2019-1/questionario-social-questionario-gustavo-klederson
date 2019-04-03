@@ -13,10 +13,14 @@ export class AppService {
   submit(nome: string, sexo: string, idade: number, cidade: string) {
     const questionario = {
       id: this.idQuestionario,
-      nome,
-      sexo,
-      idade,
-      cidade
+      // tslint:disable-next-line:object-literal-shorthand
+      nome: nome,
+      // tslint:disable-next-line:object-literal-shorthand
+      sexo: sexo,
+      // tslint:disable-next-line:object-literal-shorthand
+      idade: idade,
+      // tslint:disable-next-line:object-literal-shorthand
+      cidade: cidade
     };
     this.questionarios.push(questionario);
     this.idQuestionario++;
@@ -26,11 +30,17 @@ export class AppService {
     return this.cidades;
   }
 
+  listaDeNomes() {
+    return this.questionarios;
+  }
+
   dadosEstatisticos() {
-    let estatisticas = [];
-    let pessoaMaisVelha = -1;
-    let pessoaMaisNova = 151;
-    let idadeDasMulheres;
-    let idadeDosHomens;
+    // let estatisticas = [];
+    // let idEstatistica = 1;
+    // let pessoaMaisVelha = -1;
+    // let pessoaMaisNova = 151;
+    // let idadeDasMulheres;
+    // let idadeDosHomens;
+
   }
 }
