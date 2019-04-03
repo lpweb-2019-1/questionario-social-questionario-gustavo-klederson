@@ -6,14 +6,26 @@
     <div class="form-row">
       <div class="col"></div>
       <div class="col-md-6">
-        <h1>{{title}}</h1>
+        <h1><i class="fa fa-question-circle"></i> {{title}}</h1>
         <hr/>
         <form #cadastro="ngForm" (submit)="submit()">
           <!--Nome-->
           <div class="form-group">
             <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" name="nome" [(ngModel)]="nome" class="form-control" required/>
+            <input type="text" id="nome" name="nome" minlength="5" maxlength="150" [(ngModel)]="nome" class="form-control" required
+            #campo_nome="ngModel" [class.is-invalid]="campo_nome.invalid && (campo_nome.dirty || campo_nome.touched)"/>
             <small class="text-secondary">Insira seu nome completo.</small>
+            <div *ngIf="campo_nome.invalid && (campo_nome.dirty || campo_nome.touched)" class="invalid-feedback">
+              <span *ngIf="campo_nome.errors.required">
+                O nome é obrigatório.
+              </span>
+              <span *ngIf="campo_nome.errors.minlength">
+                O nome precisa ter, no mínimo, 5 caracteres.
+              </span>
+              <span *ngIf="campo_nome.errors.maxlength">
+                O título deve ter, no máximo, 150 caracteres.
+              </span>
+            </div>
           </div>
           <!--Sexo-->
           <div class="form-group">
@@ -21,13 +33,20 @@
             <br/>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="radio" id="sexo" name="sexo" value="Masculino" [(ngModel)]="sexo" class="form-check-input" required/> Masculino
+                <input type="radio" id="sexo" name="sexo" value="Masculino" [(ngModel)]="sexo" class="form-check-input" required
+                #campo_sexo="ngModel" [class.is-invalid]="campo_sexo.invalid && (campo_sexo.dirty || campo_sexo.touched)"/> Masculino
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="radio" id="sexo" name="sexo" value="Feminino" [(ngModel)]="sexo" class="form-check-input"/> Feminino
+                <input type="radio" id="sexo" name="sexo" value="Feminino" [(ngModel)]="sexo" class="form-check-input"
+                #campo_sexo="ngModel" [class.is-invalid]="campo_sexo.invalid && (campo_sexo.dirty || campo_sexo.touched)"/> Feminino
               </label>
+            </div>
+            <div *ngIf="campo_sexo.invalid && (campo_sexo.dirty || campo_sexo.touched)" class="invalid-feedback">
+              <span *ngIf="campo_sexo.errors.required">
+                O sexo é obrigatório.
+              </span>
             </div>
             <br/>
             <small class="text-secondary">Selecione seu sexo.</small>
@@ -35,17 +54,35 @@
           <!--Idade-->
           <div class="form-group">
             <label for="idade">Idade:</label>
-            <input type="number" id="idade" name="idade" min="0" max="150" [(ngModel)]="idade" class="form-control" required/>
+            <input type="number" id="idade" name="idade" min="0" max="150" [(ngModel)]="idade" class="form-control" required
+            #campo_idade="ngModel" [class.is-invalid]="campo_idade.invalid && (campo_idade.dirty || campo_idade.touched)"/>
             <small class="text-secondary">Insira sua idade em anos completos.</small>
+            <div *ngIf="campo_idade.invalid && (campo_idade.dirty || campo_idade.touched)" class="invalid-feedback">
+              <span *ngIf="campo_idade.errors.required">
+                A idade é obrigatória.
+              </span>
+              <span *ngIf="campo_idade.errors.minlength">
+                A idade deve ser de, no mínimo, 0 anos.
+              </span>
+              <span *ngIf="campo_idade.errors.maxlength">
+                A idade deve ser de, no máximo, 150 anos.
+              </span>
+            </div>
           </div>
           <!--Cidade-->
           <div class="form-group">
             <label for="cidade">Cidade:</label>
-            <select id="cidade" name="cidade" [(ngModel)]="cidade" class="form-control" required>
-              <option value="" selected="selected">Selecione uma cidade</option>
+            <select id="cidade" name="cidade" [(ngModel)]="cidade" class="form-control" required
+            #campo_cidade="ngModel" [class.is-invalid]="campo_cidade.invalid && (campo_cidade.dirty || campo_cidade.touched)">
+              <option value="" selected>Selecione uma cidade</option>
               <option value="cidade" *ngFor="let cidade of questionarios.listaDeCidades()">{{cidade}}</option>
             </select>
             <small class="text-secondary">Selecione sua cidade.</small>
+            <div *ngIf="campo_idade.invalid && (campo_idade.dirty || campo_idade.touched)" class="invalid-feedback">
+              <span *ngIf="campo_cidade.errors.required">
+                A cidade é obrigatória.
+              </span>
+            </div>
           </div>
           <!--Botões-->
           <div class="btn-group">
@@ -63,34 +100,34 @@
     <div class="form-row">
       <div class="col"></div>
       <div class="col-md-6">
-        <h1>Dados Estatísticos</h1>
+        <h1><i class="fa fa-list-ul"></i> Dados Estatísticos</h1>
         <hr/>
         <div class="list-group">
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais velha:</h5>
-              <small class="text-muted">{{idade}} ano(s)</small>
+              <small class="text-muted">com {{idade}} anos</small>
             </div>
             <p class="mb-1">{{nome}}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais nova:</h5>
-              <small class="text-muted">>{{idade}} ano(s)</small>
+              <small class="text-muted">com {{idade}} anos</small>
             </div>
             <p class="mb-1">{{nome}}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade das mulheres:</h5>
-              <small class="text-muted">x mulheres</small>
+              <small class="text-muted"> mulheres</small>
             </div>
             <p class="mb-1">{{idade}} anos</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade dos homens:</h5>
-              <small class="text-muted">x homens</small>
+              <small class="text-muted"> homens</small>
             </div>
             <p class="mb-1">{{idade}} anos</p>
           </a>
