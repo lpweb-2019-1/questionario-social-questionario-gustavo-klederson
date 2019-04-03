@@ -1,15 +1,18 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
+
+    <!--FORMULÁRIO PARA COLETA DOS DADOS-->
+
     <div class="form-row">
       <div class="col"></div>
       <div class="col-md-6">
         <h1>{{title}}</h1>
         <hr/>
-        <form>
+        <form #cadastro="ngForm" (submit)="submit()">
           <!--Nome-->
           <div class="form-group">
             <label for="nome">Nome Completo:</label>
-            <input type="text" class="form-control" id="nome" name="nome" required/>
+            <input type="text" id="nome" name="nome" [(ngModel)]="nome" class="form-control" required/>
             <small class="text-secondary">Insira seu nome completo.</small>
           </div>
           <!--Sexo-->
@@ -18,44 +21,45 @@
             <br/>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input"  id="sexo" name="sexo" value="Masculino" required/> Masculino
+                <input type="radio" id="sexo" name="sexo" value="Masculino" [(ngModel)]="sexo" class="form-check-input" required/> Masculino
               </label>
             </div>
             <div class="form-check-inline">
               <label class="form-check-label">
-                <input type="radio" class="form-check-input" id="sexo" name="sexo" value="Feminino" required/> Feminino
+                <input type="radio" id="sexo" name="sexo" value="Feminino" [(ngModel)]="sexo" class="form-check-input"/> Feminino
               </label>
             </div>
             <br/>
-            <small class="text-secondary">Insira sua idade em anos completos.</small>
+            <small class="text-secondary">Selecione seu sexo.</small>
           </div>              
           <!--Idade-->
           <div class="form-group">
             <label for="idade">Idade:</label>
-            <input type="number" class="form-control" id="idade" name="idade" required/>
+            <input type="number" id="idade" name="idade" min="0" max="150" [(ngModel)]="idade" class="form-control" required/>
             <small class="text-secondary">Insira sua idade em anos completos.</small>
           </div>
           <!--Cidade-->
           <div class="form-group">
             <label for="cidade">Cidade:</label>
-            <select class="form-control" id="cidade" nome="cidade" required>
-              <option value="cidade">Palmas</option>
-              <option value="cidade">Porto Nacional</option>
-              <option value="cidade">Lajeado</option>
-              <option value="cidade">Paraíso</option>
+            <select id="cidade" name="cidade" [(ngModel)]="cidade" class="form-control" required>
+              <option value="" selected="selected">Selecione uma cidade</option>
+              <option value="cidade" *ngFor="let cidade of questionarios.listaDeCidades()">{{cidade}}</option>
             </select>
             <small class="text-secondary">Selecione sua cidade.</small>
           </div>
           <!--Botões-->
           <div class="btn-group">
-            <button type="button" class="btn btn-outline-primary"><i class="fa fa-check"></i> Salvar</button>
-            <button type="button" class="btn btn-outline-secondary" formnovalidate><i class="fa fa-times"></i> Limpar</button>
+            <button type="submit" class="btn btn-outline-primary" [disabled]="!cadastro.form.valid"><i class="fa fa-check"></i> Salvar</button>
+            <button type="reset" class="btn btn-outline-secondary" formnovalidate><i class="fa fa-times"></i> Limpar</button>
           </div>
         </form>
         <hr/>
       </div>
       <div class="col"></div>
     </div>
+
+    <!--APRESENTAÇÃO ESTATÍSTICA DOS DADOS COLETADOS-->
+
     <div class="form-row">
       <div class="col"></div>
       <div class="col-md-6">
@@ -65,73 +69,76 @@
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais velha:</h5>
-              <small class="text-muted">x anos</small>
+              <small class="text-muted">{{idade}} ano(s)</small>
             </div>
-            <p class="mb-1">Fulano da Silva</p>
+            <p class="mb-1">{{nome}}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais nova:</h5>
-              <small class="text-muted">x anos</small>
+              <small class="text-muted">>{{idade}} ano(s)</small>
             </div>
-            <p class="mb-1">Fulano da Silva</p>
+            <p class="mb-1">{{nome}}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade das mulheres:</h5>
               <small class="text-muted">x mulheres</small>
             </div>
-            <p class="mb-1">x anos</p>
+            <p class="mb-1">{{idade}} anos</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade dos homens:</h5>
               <small class="text-muted">x homens</small>
             </div>
-            <p class="mb-1">x anos</p>
+            <p class="mb-1">{{idade}} anos</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade em cada cidade:</h5>
               <small class="text-muted"></small>
             </div>
-            <table class="table table-bordered ">
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-              </tr>
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-              </tr>
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-              </tr>
-            </table>
+            <div table-responsive-lg>
+              <table class="table table-bordered ">
+                <thead>
+                  <tr>
+                    <th id="table1">Cidade</th>
+                    <th id="table1">Idade</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cidade of questionarios.listaDeCidades()">
+                    <td>{{cidade}}</td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Porcentagem de pessoas por sexo em cada cidade:</h5>
               <small class="text-muted"></small>
             </div>
-            <table class="table table-bordered ">
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-                <td>media</td>
-              </tr>
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-                <td>media</td>
-              </tr>
-              <tr>
-                <td>cidade</td>
-                <td>x anos</td>
-                <td>media</td>
-              </tr>
-            </table>
+            <div table-responsive-lg>
+              <table class="table table-bordered ">
+                <thead>
+                  <tr>
+                    <th id="table2">Cidade</th>
+                    <th id="table2">% Feminino</th>
+                    <th id="table2">% Masculino</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let cidade of questionarios.listaDeCidades()">
+                    <td>{{cidade}}</td>
+                    <td></td>
+                    <td></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </a>
         </div>
         <hr/>
