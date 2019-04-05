@@ -36,11 +36,5 @@ export class AppService {
 
   dadosEstatisticos() {
     // let estatisticas = [];
-    // let idEstatistica = 1;
-    // let pessoaMaisVelha = -1;
-    // let pessoaMaisNova = 151;
-    // let idadeDasMulheres;
-    // let idadeDosHomens;
-
   }
 }

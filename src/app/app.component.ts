@@ -9,18 +9,18 @@ import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 })
 export class AppComponent {
   title = 'Questionário Social';
-  nome: string = null;
-  sexo: string = null;
-  idade: number = null;
-  cidade: string = null;
-  dados: any = [];
+  nome = null;
+  sexo = null;
+  idade = null;
+  cidade = '';
+  dados = [];
 
   constructor(
     private questionarios: AppService,
     @Inject(LOCAL_STORAGE) private storage: WebStorageService
     ) { }
 
-  submit(form: any) {
+  submit(form) {
     this.questionarios.submit(this.nome, this.sexo, this.idade, this.cidade);
     form.reset();
   }

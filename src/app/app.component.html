@@ -8,11 +8,11 @@
       <div class="col-md-6">
         <h1><i class="fa fa-question-circle"></i> {{title}}</h1>
         <hr/>
-        <form #cadastro="ngForm" (submit)="submit()">
+        <form #cadastro="ngForm" (submit)="submit(cadastro)">
           <!--Nome-->
           <div class="form-group">
             <label for="nome">Nome Completo:</label>
-            <input type="text" id="nome" name="nome" minlength="5" maxlength="150" [(ngModel)]="nome" class="form-control" required
+            <input type="text" id="nome" name="nome" minlength="1" maxlength="150" [(ngModel)]="nome" class="form-control" required
             #campo_nome="ngModel" [class.is-invalid]="campo_nome.invalid && (campo_nome.dirty || campo_nome.touched)"/>
             <small class="text-secondary">Insira seu nome completo.</small>
             <div *ngIf="campo_nome.invalid && (campo_nome.dirty || campo_nome.touched)" class="invalid-feedback">
@@ -20,7 +20,7 @@
                 O nome é obrigatório.
               </span>
               <span *ngIf="campo_nome.errors.minlength">
-                O nome precisa ter, no mínimo, 5 caracteres.
+                O nome precisa ter, no mínimo, 1 caractere.
               </span>
               <span *ngIf="campo_nome.errors.maxlength">
                 O título deve ter, no máximo, 150 caracteres.
@@ -74,11 +74,11 @@
             <label for="cidade">Cidade:</label>
             <select id="cidade" name="cidade" [(ngModel)]="cidade" class="form-control" required
             #campo_cidade="ngModel" [class.is-invalid]="campo_cidade.invalid && (campo_cidade.dirty || campo_cidade.touched)">
-              <option value="" selected>Selecione uma cidade</option>
+              <option value="" selected disabled>Selecione uma cidade</option>
               <option value="cidade" *ngFor="let cidade of questionarios.listaDeCidades()">{{cidade}}</option>
             </select>
             <small class="text-secondary">Selecione sua cidade.</small>
-            <div *ngIf="campo_idade.invalid && (campo_idade.dirty || campo_idade.touched)" class="invalid-feedback">
+            <div *ngIf="campo_cidade.invalid && (campo_cidade.dirty || campo_cidade.touched)" class="invalid-feedback">
               <span *ngIf="campo_cidade.errors.required">
                 A cidade é obrigatória.
               </span>
@@ -179,10 +179,6 @@
           </a>
         </div>
         <hr/>
-
-        <p>Aqui!!!</p>
-        <li *ngFor="let n of questionarios.listaDeNomes()">{{ n.nome }}</li>
-
       </div>
       <div class="col"></div>
     </div>
