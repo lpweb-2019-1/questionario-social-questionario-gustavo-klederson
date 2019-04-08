@@ -61,10 +61,10 @@
               <span *ngIf="campo_idade.errors.required">
                 A idade é obrigatória.
               </span>
-              <span *ngIf="campo_idade.errors.minlength">
+              <span *ngIf="campo_idade.errors.min">
                 A idade deve ser de, no mínimo, 0 anos.
               </span>
-              <span *ngIf="campo_idade.errors.maxlength">
+              <span *ngIf="campo_idade.errors.max">
                 A idade deve ser de, no máximo, 150 anos.
               </span>
             </div>
@@ -75,7 +75,7 @@
             <select id="cidade" name="cidade" [(ngModel)]="cidade" class="form-control" required
             #campo_cidade="ngModel" [class.is-invalid]="campo_cidade.invalid && (campo_cidade.dirty || campo_cidade.touched)">
               <option value="" selected disabled>Selecione uma cidade</option>
-              <option value="cidade" *ngFor="let cidade of questionarios.listaDeCidades()">{{cidade}}</option>
+              <option *ngFor="let cidade of appService.listaDeCidades()">{{ cidade }}</option>
             </select>
             <small class="text-secondary">Selecione sua cidade.</small>
             <div *ngIf="campo_cidade.invalid && (campo_cidade.dirty || campo_cidade.touched)" class="invalid-feedback">
@@ -106,9 +106,9 @@
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais velha:</h5>
-              <small class="text-muted">com {{idade}} anos</small>
+              <small class="text-muted">com {{ appService.idadePessoaMaisVelha }} anos</small>
             </div>
-            <p class="mb-1">{{nome}}</p>
+            <p class="mb-1">{{ appService.nomePessoaMaisVelha }}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
@@ -145,7 +145,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cidade of questionarios.listaDeCidades()">
+                  <tr *ngFor="let cidade of appService.listaDeCidades()">
                     <td>{{cidade}}</td>
                     <td></td>
                   </tr>
@@ -168,7 +168,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cidade of questionarios.listaDeCidades()">
+                  <tr *ngFor="let cidade of appService.listaDeCidades()">
                     <td>{{cidade}}</td>
                     <td></td>
                     <td></td>

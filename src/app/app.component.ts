@@ -1,6 +1,5 @@
-import { Component, Inject } from '@angular/core';
+import { Component } from '@angular/core';
 import { AppService } from './app.service';
-import { LOCAL_STORAGE, WebStorageService } from 'angular-webstorage-service';
 
 @Component({
   selector: 'app-root',
@@ -13,27 +12,22 @@ export class AppComponent {
   sexo = null;
   idade = null;
   cidade = '';
-  dados = [];
 
+  /**
+   * O construtor da classe
+   * @param appService Uma instânia de AppService
+   */
   constructor(
-    private questionarios: AppService,
-    @Inject(LOCAL_STORAGE) private storage: WebStorageService
+    private appService: AppService
     ) { }
 
+  /**
+   * Obtém os dados vinculados ao formulário e interage com o serviço
+   * AppService para salvar a notícia.
+   * @param form Uma referência ao formulário declarado no template.
+   */
   submit(form) {
-    this.questionarios.submit(this.nome, this.sexo, this.idade, this.cidade);
+    this.appService.submit(this.nome, this.sexo, this.idade, this.cidade);
     form.reset();
-  }
-
-  saveInLocal(key, val): void {
-    console.log('recieved= key:' + key + 'value:' + val);
-    this.storage.set(key, val);
-    this.dados[key] = this.storage.get(key);
-  }
-
-  getFromLocal(key): void {
-    console.log('recieved = key:' + key);
-    this.dados[key] = this.storage.get(key);
-    console.log(this.dados);
   }
 }
