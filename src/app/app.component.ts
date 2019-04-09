@@ -30,4 +30,8 @@ export class AppComponent {
     this.appService.submit(this.nome, this.sexo, this.idade, this.cidade);
     form.reset();
   }
+
+  delete() {
+    this.appService.deleteLocalStorage();
+  }
 }

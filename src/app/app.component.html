@@ -113,23 +113,23 @@
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Nome da pessoa mais nova:</h5>
-              <small class="text-muted">com {{idade}} anos</small>
+              <small class="text-muted">com {{ appService.idadePessoaMaisNova }} anos</small>
             </div>
-            <p class="mb-1">{{nome}}</p>
+            <p class="mb-1">{{ appService.nomePessoaMaisNova }}</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade das mulheres:</h5>
-              <small class="text-muted"> mulheres</small>
+              <small class="text-muted">{{ appService.totalMulheres }} mulheres</small>
             </div>
-            <p class="mb-1">{{idade}} anos</p>
+            <p class="mb-1">{{ appService.mediaIdadeMulheres }} anos</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1">• Média de idade dos homens:</h5>
-              <small class="text-muted"> homens</small>
+              <small class="text-muted">{{ appService.totalHomens }} homens</small>
             </div>
-            <p class="mb-1">{{idade}} anos</p>
+            <p class="mb-1">{{ appService.mediaIdadeHomens }} anos</p>
           </a>
           <a class="list-group-item list-group-item-action">
             <div class="d-flex w-100 justify-content-between">
@@ -177,6 +177,10 @@
               </table>
             </div>
           </a>
+        </div>
+        <br/>
+        <div class="btn-group">
+          <button type="button" onclick="delete()" class="btn btn-outline-danger"><i class="fa fa-trash"></i> Excluir Dados</button>
         </div>
         <hr/>
       </div>
