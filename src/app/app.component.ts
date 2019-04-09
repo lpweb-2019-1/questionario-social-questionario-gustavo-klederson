@@ -11,7 +11,7 @@ export class AppComponent {
   nome = null;
   sexo = null;
   idade = null;
-  cidade = '';
+  cidade = null;
 
   /**
    * O construtor da classe

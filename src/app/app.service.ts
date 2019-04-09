@@ -7,7 +7,7 @@ import { stringify } from '@angular/core/src/util';
 
 export class AppService {
   pessoas = [];
-  pessoasID = 1;
+  pessoasID = null;
   cidades = ['Palmas', 'Paraíso', 'Porto Nacional', 'Lajeado'];
 
   idadePessoaMaisVelha = 0;
@@ -15,19 +15,24 @@ export class AppService {
   nomePessoaMaisVelha = '';
   nomePessoaMaisNova = '';
 
-  constructor() {}
+  mediaIdadeMulher = null;
+  mediaIdadeHomens = null;
+
+  constructor() {
+    if (localStorage.getItem('pessoas')) {
+      this.pessoas = JSON.parse(localStorage.getItem('pessoas'));
+    }
+    this.pessoaMaisVelha();
+    this.pessoaMaisNova();
+  }
 
   submit(nome: string, sexo: string, idade: number, cidade: string) {
-    const pessoa = {
-      id: this.pessoasID,
-      nome,
-      sexo,
-      idade,
-      cidade
-    };
+    const pessoa = {id: this.pessoasID, nome: nome, sexo: sexo, idade: idade, cidade: cidade};
     this.pessoas.push(pessoa);
     this.pessoasID++;
     this.setInLocalStorage('pessoas', this.pessoas);
+    this.pessoaMaisVelha();
+    this.pessoaMaisNova();
   }
 
   setInLocalStorage(key: string, data: any) {
@@ -57,19 +62,27 @@ export class AppService {
       if (pessoa.idade > this.idadePessoaMaisVelha) {
         this.idadePessoaMaisVelha = pessoa.idade;
         this.nomePessoaMaisVelha = pessoa.nome;
-        // localStorage.setItem('aPessoaMaisVelha', JSON.stringify(pessoa.nome, pessoa.idade));
-        return this.idadePessoaMaisVelha;
       }
     }
   }
 
   pessoaMaisNova() {
-    for (const pessoa of this.pessoas) {
-      if (pessoa.idade > this.idadePessoaMaisNova) {
-        this.nomePessoaMaisNova = pessoa.nome;
+    const pessoas = JSON.parse(localStorage.getItem('pessoas'));
+    for (const pessoa of pessoas) {
+      if (pessoa.idade < this.idadePessoaMaisNova) {
         this.idadePessoaMaisNova = pessoa.idade;
-        // localStorage.setItem('aPessoaMaisNova', JSON.stringify(pessoa.nome, pessoa.idade));
+        this.nomePessoaMaisNova = pessoa.nome;
       }
+    }
+  }
+
+  mediaIdadeMulheres() {
+    const pessoas = JSON.parse(localStorage.getItem('pessoas'));
+    let cont = 0;
+    for (const pessoa of pessoas) {
+      if (pessoa.sexo === 'Feminino') {
+        this.mediaIdadeMulher = pessoa.idade;
+        cont++;
     }
   }
 }
