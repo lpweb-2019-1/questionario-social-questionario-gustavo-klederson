@@ -30,6 +30,7 @@ export class AppService {
       this.idadePessoa();
       this.mediaIdades();
       // this.mediaCidades();
+      this.porcentagemPessoaPorCidade();
     }
   }
 
@@ -101,8 +102,18 @@ export class AppService {
         this.totalHomens++;
       }
     }
-    this.mediaIdadeMulheres = this.mediaIdadeMulheres / this.totalMulheres;
-    this.mediaIdadeHomens = this.mediaIdadeHomens / this.totalHomens;
+    if (this.totalMulheres === 0){
+      this.mediaIdadeMulheres = 0;
+    }
+    else {
+      this.mediaIdadeMulheres = this.mediaIdadeMulheres / this.totalMulheres;
+    }
+    if (this.totalHomens === 0) {
+      this.mediaIdadeHomens = 0;
+    }
+    else {
+      this.mediaIdadeHomens = this.mediaIdadeHomens / this.totalHomens;
+    }
   }
 
   mediaCidades() {
@@ -120,5 +131,28 @@ export class AppService {
     }
     this.mediaIdadeMulheres = this.mediaIdadeMulheres / this.totalMulheres;
     this.mediaIdadeHomens = this.mediaIdadeHomens / this.totalHomens;
+  }
+
+  porcentagemPessoaPorCidade() {
+    let porcenragemIdadeCidade = []
+    let procentagemF = 0;
+    let procentagemM = 0;
+    let contTodos = 0;
+    let contF = 0;
+    let contM = 0;
+    const pessoas = JSON.parse(localStorage.getItem('pessoas'));
+    for (let i = 0; i < this.cidades.length; i++) {
+      for (this.cidades[i] of pessoas) {
+        if (pessoas.sexo === 'Feminino') {
+          contF ++;
+          contTodos ++;
+        }
+        else {
+          contM ++;
+          contTodos ++;
+        }
+      }
+      porcenragemIdadeCidade.push( procentagemF = (contF*100)/contTodos);
+    }
   }
 }
