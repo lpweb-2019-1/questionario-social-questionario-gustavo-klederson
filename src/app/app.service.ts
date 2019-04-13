@@ -30,7 +30,7 @@ export class AppService {
       this.idadePessoa();
       this.mediaIdades();
       // this.mediaCidades();
-      this.porcentagemPessoaPorCidade();
+      // this.porcentagemPessoaPorCidade();
     }
   }
 
@@ -141,18 +141,28 @@ export class AppService {
     let contF = 0;
     let contM = 0;
     const pessoas = JSON.parse(localStorage.getItem('pessoas'));
-    for (let i = 0; i < this.cidades.length; i++) {
-      for (this.cidades[i] of pessoas) {
-        if (pessoas.sexo === 'Feminino') {
-          contF ++;
-          contTodos ++;
+    let result = {}
+
+    pessoas.forEach(p => {
+      if(result[p.cidade]){
+        result[p.cidade].contT += 1
+        if(p.sexo === 'Masculino'){
+          result[p.cidade].contM +=1
         }
-        else {
-          contM ++;
-          contTodos ++;
+        else{
+          result[p.cidade].contF +=1
         }
       }
-      porcenragemIdadeCidade.push( procentagemF = (contF*100)/contTodos);
-    }
+      else{
+        result[p.cidade] = {
+          cidade: p.cidade,
+          contM: p.sexo === 'Masculino' ? 1: 0,
+          contF: p.sexo === 'Feminino' ? 1: 0,
+          contT: 1
+        }
+      }
+    });
+
+      return Object.values(result)
   }
 }

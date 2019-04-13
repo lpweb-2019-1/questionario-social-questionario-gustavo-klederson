@@ -168,10 +168,11 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let cidade of appService.listaDeCidades()">
-                    <td>{{cidade}}</td>
-                    <td></td>
-                    <td></td>
+                  <tr *ngFor="let result of appService.porcentagemPessoaPorCidade()">
+                    <td>{{result.cidade}}</td>
+                    <td>{{result.contF * 100 / result.contT}}</td>
+                    <td>{{result.contM * 100 / result.contT}}</td>
+                    
                   </tr>
                 </tbody>
               </table>
