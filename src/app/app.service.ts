@@ -134,12 +134,6 @@ export class AppService {
   }
 
   porcentagemPessoaPorCidade() {
-    let porcenragemIdadeCidade = []
-    let procentagemF = 0;
-    let procentagemM = 0;
-    let contTodos = 0;
-    let contF = 0;
-    let contM = 0;
     const pessoas = JSON.parse(localStorage.getItem('pessoas'));
     let result = {}
 
